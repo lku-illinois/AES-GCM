@@ -1,4 +1,4 @@
-module top #(
+module split_multiplier #(
     parameter int DATA__WIDTH = 128,
     parameter int SPLIT_WIDTH = 32 
 )(
