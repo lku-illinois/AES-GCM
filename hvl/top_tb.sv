@@ -79,6 +79,7 @@ module top_tb;
     // Print the compute_hh values
     $display("\nFinal Computed HH Values: %h", AA_o);
     $display("\nFinal Multiply Output: %h", mul_o);
+    // Expect: 59ed3f2bb1a0aaa07c9f56c6a504647b
 
     #10 $finish;
   end
