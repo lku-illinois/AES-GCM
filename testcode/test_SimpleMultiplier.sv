@@ -1,3 +1,4 @@
+// this testcode verifies that our multiplier (not split) is working
 module top_tb;
 
     timeunit 1ps;

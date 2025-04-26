@@ -16,6 +16,8 @@ set design_toplevel top
 # output port '%s' is connected directly to output port '%s'
 suppress_message LINT-31
 # In design '%s', output port '%s' is connected directly to '%s'.
+suppress_message LINT-58
+suppress_message LINT-59
 suppress_message LINT-52
 # '%s' is not connected to any nets
 suppress_message LINT-28

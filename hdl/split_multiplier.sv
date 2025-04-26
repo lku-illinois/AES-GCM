@@ -4,24 +4,26 @@ module split_multiplier #(
 )(
     input   logic                       clk,
     input   logic                       rst,
+    input   logic                       flush,
     input   logic   [SPLIT_WIDTH-1:0]   ha_i,   // H[127:96]
     input   logic   [SPLIT_WIDTH-1:0]   hb_i,   // H[95:64]
     input   logic   [SPLIT_WIDTH-1:0]   hc_i,   // H[63:32]
     input   logic   [SPLIT_WIDTH-1:0]   hd_i,   // H[31:0]
     input   logic   [DATA__WIDTH-1:0]   a_i,    // Choose Ai or Zd or Ai^Zd
-  	output  logic   [DATA__WIDTH-1:0]   mul_o,  // Feeds into Zd
-    output  logic   [DATA__WIDTH-1:0]   AA_o    // Debug
+  	output  logic   [DATA__WIDTH-1:0]   mul_o  // Feeds into Zd
+    // output  logic   [DATA__WIDTH-1:0]   AA_o    // Debug
 );
     // Multiply output
     logic   [DATA__WIDTH-1:0]   mul1_, mul2_, mul3_, mul4_;
     // computeAA[31] output
-    logic   [DATA__WIDTH-1:0]   AAa_, AAb_, AAc_, AAd_;
+    logic   [DATA__WIDTH-1:0]   AAa_, AAb_, AAc_; //, AAd_;
     // Multiply register
     logic   [DATA__WIDTH-1:0]   Za_q, Zb_q, Zc_q, Zd_q;
     logic   [DATA__WIDTH-1:0]   Aa_q, Ab_q, Ac_q;
+    // logic   [DATA__WIDTH-1:0]   AA_o;
     
     always_ff @( posedge clk ) begin 
-        if(rst) begin
+        if(rst || flush) begin
             Za_q <= '0;
             Zb_q <= '0;
             Zc_q <= '0;
@@ -36,7 +38,7 @@ module split_multiplier #(
     end
 
     always_ff @( posedge clk ) begin 
-        if(rst) begin
+        if(rst || flush) begin
             Aa_q <= '0;
             Ab_q <= '0;
             Ac_q <= '0;
@@ -73,11 +75,11 @@ module split_multiplier #(
     sub_mul4 (
         .hd_i(hd_i),
         .a_4(Ac_q),
-        .AA_o(AAd_),
+        // .AA_o(AAd_),
         .x4_o(mul4_)
     );
 
     assign mul_o = Zd_q;
-    assign AA_o = AAd_;
+    // assign AA_o = AAd_;
 
 endmodule

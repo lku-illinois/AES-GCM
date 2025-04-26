@@ -110,7 +110,7 @@ module split_mul_4 #(
 )(
     input   logic   [SPLIT_WIDTH-1:0]   hd_i,   // H[31:0]
     input   logic   [DATA__WIDTH-1:0]   a_4,
-    output  logic   [DATA__WIDTH-1:0]   AA_o,
+    // output  logic   [DATA__WIDTH-1:0]   AA_o,
     output  logic   [DATA__WIDTH-1:0]   x4_o
 );
     localparam irreducible_poly = 128'he1000000000000000000000000000000;
@@ -134,7 +134,7 @@ module split_mul_4 #(
         end
     end
 
-    assign AA_o = compute_aa_4[SPLIT_WIDTH-1];
+    // assign AA_o = compute_aa_4[SPLIT_WIDTH-1];
     assign x4_o = x_tmp;
 
 endmodule
